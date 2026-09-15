@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 2. Inicializa o cliente do Supabase
       const SUPABASE_URL = "https://taviponvwfixthhnfgvk.supabase.co";
-      const SUPABASE_ANON_KEY = "sb_publishable_sESmAMxBhMLaJS3SRhUczg_CnBPzEMs"; 
+      const SUPABASE_ANON_KEY = "sb_publishable_sESmAMxBhMLaJS3SRhUczg_CnBPzEMs";
 
       const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
