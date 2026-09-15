@@ -88,43 +88,63 @@ document.addEventListener('DOMContentLoaded', () => {
   btnTopo.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 
+  // ==========================================
   // CONEXÃO E ENVIO DE DADOS PARA O SUPABASE
-  // 1. Inicializa o cliente do Supabase
-  const SUPABASE_URL = "https://supabase.co";
-  const SUPABASE_ANON_KEY = "https://taviponvwfixthhnfgvk.supabase.co/rest/v1/formulario";
-  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  // ==========================================
 
-  // 2. Escuta o evento de clique no botão de enviar (submit)
-  formulario.addEventListener('submit', async (event) => {
-    event.preventDefault(); // Evita que a página recarregue
+  // 1. Captura o formulário do HTML (reativado fora do comentário)
+  const formulario = document.getElementById("formulario");
 
-    // Captura os valores digitados nos inputs 
-    const nomeDigitado = document.getElementById('nome').value;
-    const emailDigitado = document.getElementById('email').value;
-    const mensagemDigitada = document.getElementById('mensagem').value;
+  // Garante que o código do Supabase só rode se o formulário existir na página atual
+  if (formulario) {
 
-    try {
-      // 3. Envia os dados para a tabela do Supabase
-      const { data, error } = await supabase
-        .from('formulario') // Nome da tabela
-        .insert([
-          {
-            nome: nomeDigitado,   // coluna nome na tabela do Supabase
-            email: emailDigitado, // coluna email na tabela do Supabase
-            mensagem: mensagemDigitada // coluna mensagem na tabela do Supabase
-          }
-        ]);
+    // 2. Inicializa o cliente do Supabase
+    const SUPABASE_URL = "https://taviponvwfixthhnfgvk.supabase.co";
 
-      if (error) {
-        throw error;
+    // ATENÇÃO: Substitua o texto abaixo pela sua chave real copiada do painel do Supabase
+    // Ela é um texto bem longo, cheio de letras e números aleatórios.
+    const SUPABASE_ANON_KEY = "sb_publishable_sESmAMxBhMLaJS3SRhUczg_CnBPzEMs";
+
+    // Cria a conexão usando a biblioteca importada no HTML
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // 3. Escuta o evento de clique no botão de enviar (submit)
+    formulario.addEventListener('submit', async (event) => {
+      event.preventDefault(); // Evita que a página recarregue
+
+      // Captura os valores digitados nos inputs 
+      const nomeDigitado = document.getElementById('nome').value;
+      const emailDigitado = document.getElementById('email').value;
+      const mensagemDigitada = document.getElementById('mensagem').value;
+
+      // Validação simples antes de enviar
+      if (!nomeDigitado || !emailDigitado || !mensagemDigitada) {
+        alert('Por favor, preencha todos os campos!');
+        return;
       }
 
-      alert('Dados salvos com sucesso no Supabase! 🎉');
-      formulario.reset(); // Limpa o formulário após enviar
+      try {
+        // 4. Envia os dados para a tabela do Supabase
+        const { data, error } = await supabaseClient
+          .from('formulario') // Nome exato da tabela no seu painel
+          .insert([
+            {
+              nome: nomeDigitado,
+              email: emailDigitado,
+              mensagem: mensagemDigitada
+            }
+          ]);
 
-    } catch (error) {
-      console.error('Erro ao salvar:', error);
-      alert('Ops! Ocorreu um erro ao enviar os dados.');
-    }
-  });
+        if (error) throw error;
+
+        alert('Dados salvos com sucesso no Supabase! 🎉');
+        formulario.reset(); // Limpa o formulário após enviar
+
+      } catch (error) {
+        console.error('Erro ao salvar no Supabase:', error);
+        alert('Ops! Ocorreu um erro ao enviar os dados. Verifique o console.');
+      }
+    });
+  }
+
 });
