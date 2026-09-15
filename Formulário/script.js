@@ -4,7 +4,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('header');
   const nav = document.querySelector('header nav');
-  
+
   // Cria o botão hambúrguer automaticamente
   const btnMenu = document.createElement('button');
   btnMenu.innerHTML = '<i class="fa-solid fa-bars"></i>';
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. MARCAR PÁGINA ATUAL NO MENU
   const paginaAtual = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('header nav a').forEach(link => {
-    if(link.getAttribute('href') === paginaAtual){
+    if (link.getAttribute('href') === paginaAtual) {
       link.style.color = 'var(--laranja)';
       link.style.borderBottom = '2px solid var(--laranja)';
     }
@@ -42,39 +42,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 3. SCROLL SUAVE para links com # (ex: #contato)
   document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', function(e){
+    a.addEventListener('click', function (e) {
       e.preventDefault();
       const destino = document.querySelector(this.getAttribute('href'));
-      if(destino) destino.scrollIntoView({behavior:'smooth'});
+      if (destino) destino.scrollIntoView({ behavior: 'smooth' });
     });
   });
 
   // 4. ANIMAÇÃO DOS CARDS quando aparecem na tela
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if(entry.isIntersecting) entry.target.classList.add('visivel');
+      if (entry.isIntersecting) entry.target.classList.add('visivel');
     });
   });
   document.querySelectorAll('.card, .area-detalhe, .news-item').forEach(el => observer.observe(el));
 
   // 5. VALIDAÇÃO DO FORMULÁRIO DE CONTATO
-  const form = document.querySelector('.form-contato');
+  /*const form = document.querySelector('.form-contato');
   const formulario = document.getElementById("formulario");
-  if(form){
+  if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const nome = form.querySelector('input[type="text"]').value;
       const email = form.querySelector('input[type="email"]').value;
       const msg = form.querySelector('textarea').value;
 
-      if(!nome || !email || !msg){
+      if (!nome || !email || !msg) {
         alert('Por favor, preencha todos os campos!');
         return;
       }
       alert(`Obrigado, ${nome}! Sua mensagem foi enviada para o Pesca Tech. Em breve retornaremos em ${email}`);
       form.reset();
     });
-  }
+  }*/
 
   // 6. BOTÃO VOLTAR AO TOPO
   const btnTopo = document.createElement('button');
@@ -85,5 +85,50 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', () => {
     btnTopo.style.display = window.scrollY > 400 ? 'block' : 'none';
   });
-  btnTopo.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+  btnTopo.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+
+  // CONEXÃO E ENVIO DE DADOS PARA O SUPABASE
+  // 1. Inicializa o cliente do Supabase
+  const SUPABASE_URL = "https://supabase.co";
+  const SUPABASE_ANON_KEY = "https://taviponvwfixthhnfgvk.supabase.co/rest/v1/formulario";
+  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // 2. Captura o formulário do HTML
+  // const formulario = document.querySelector('form'); // ou use document.getElementById('id-do-form')
+
+  // 3. Escuta o evento de clique no botão de enviar (submit)
+  formulario.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Evita que a página recarregue
+
+    // Captura os valores digitados nos inputs (substitua pelos IDs/Classes do seu HTML)
+    const nomeDigitado = document.getElementById('nome').value;
+    const emailDigitado = document.getElementById('email').value;
+    const mensagemDigitada = document.getElementById('mensagem').value;
+
+    try {
+      // 4. Envia os dados para a tabela do Supabase
+      const { data, error } = await supabase
+        .from('respostas_formulario') // Nome exato da tabela criada no Passo 1
+        .insert([
+          {
+            nome: nomeDigitado,   // Coluna do banco : Variável do JS
+            email: emailDigitado,
+            mensagem: mensagemDigitada
+          }
+        ]);
+
+      if (error) {
+        throw error;
+      }
+
+      alert('Dados salvos com sucesso no Supabase! 🎉');
+      formulario.reset(); // Limpa o formulário após enviar
+
+    } catch (error) {
+      console.error('Erro ao salvar:', error);
+      alert('Ops! Ocorreu um erro ao enviar os dados.');
+    }
+  });
+
 });
