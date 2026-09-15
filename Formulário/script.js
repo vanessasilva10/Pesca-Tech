@@ -108,6 +108,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cria a conexão usando a biblioteca importada no HTML
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+    // ==========================================
+    // 🧪 TESTE DE CONEXÃO COM O SUPABASE
+    // ==========================================
+    async function testarConexao() {
+      try {
+        // Tenta fazer uma consulta simples na sua tabela
+        const { data, error } = await supabaseClient
+          .from('formulario')
+          .select('*')
+          .limit(1); // Só pede 1 linha para ser rápido
+
+        if (error) {
+          console.error("❌ Erro na comunicação com o Supabase:", error.message);
+        } else {
+          console.log("✅ CONEXÃO COM O SUPABASE ESTABELECIDA COM SUCESSO! Dados recebidos:", data);
+        }
+      } catch (err) {
+        console.error("💥 Erro crítico ao tentar conectar:", err);
+      }
+    }
+
+    // Executa o teste assim que a página carrega
+    testarConexao();
+    // ==========================================
+
     // 3. Escuta o evento de clique no botão de enviar (submit)
     formulario.addEventListener('submit', async (event) => {
       event.preventDefault(); // Evita que a página recarregue
