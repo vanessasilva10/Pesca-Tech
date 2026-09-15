@@ -92,32 +92,35 @@ document.addEventListener('DOMContentLoaded', () => {
   // CONEXÃO E ENVIO DE DADOS PARA O SUPABASE
   // ==========================================
 
-  // 1. Captura o formulário do HTML (reativado fora do comentário)
+  // 1. Captura o formulário do HTML
   const formulario = document.getElementById("formulario");
 
   // Garante que o código do Supabase só rode se o formulário existir na página atual
   if (formulario) {
+    
+    // 🚨 SEGURANÇA: Se por algum motivo a biblioteca atrasar para carregar,
+    // usamos 'window.supabase' para garantir que o navegador encontre a biblioteca global
+    if (typeof window.supabase === 'undefined') {
+      console.error("❌ A biblioteca do Supabase ainda não foi totalmente carregada pelo HTML.");
+      alert("Erro ao carregar o banco de dados. Por favor, atualize a página.");
+      return; // Para o código aqui para não quebrar a página
+    }
 
-    // 2. Inicializa o cliente do Supabase
-    const SUPABASE_URL = "https://taviponvwfixthhnfgvk.supabase.co";
-
-    // ATENÇÃO: Substitua o texto abaixo pela sua chave real copiada do painel do Supabase
-    // Ela é um texto bem longo, cheio de letras e números aleatórios.
-    const SUPABASE_ANON_KEY = "sb_publishable_sESmAMxBhMLaJS3SRhUczg_CnBPzEMs";
-
-    // Cria a conexão usando a biblioteca importada no HTML
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // 2. Inicializa o cliente do Supabase usando a variável global correta
+    const SUPABASE_URL = "https://supabase.co"; 
+    const SUPABASE_ANON_KEY = "COLE_AQUI_A_SUA_CHAVE_ANON_COMPLETA"; // Garanta que sua chave real está aqui
+    
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     // ==========================================
     // 🧪 TESTE DE CONEXÃO COM O SUPABASE
     // ==========================================
     async function testarConexao() {
       try {
-        // Tenta fazer uma consulta simples na sua tabela
         const { data, error } = await supabaseClient
           .from('formulario')
           .select('*')
-          .limit(1); // Só pede 1 linha para ser rápido
+          .limit(1);
 
         if (error) {
           console.error("❌ Erro na comunicação com o Supabase:", error.message);
@@ -129,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Executa o teste assim que a página carrega
+    // Executa o teste automático
     testarConexao();
     // ==========================================
 
@@ -154,9 +157,9 @@ document.addEventListener('DOMContentLoaded', () => {
           .from('formulario') // Nome exato da tabela no seu painel
           .insert([
             {
-              nome: nomeDigitado,
-              email: emailDigitado,
-              mensagem: mensagemDigitada
+              nome: nomeDigitado,   
+              email: emailDigitado, 
+              mensagem: mensagemDigitada 
             }
           ]);
 
@@ -171,5 +174,4 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-
 });
