@@ -12,15 +12,31 @@ body{ color:var(--texto); line-height:1.6; }
 /* HEADER */
 header{
   
-  display:grid; grid-template-columns:auto 1fr auto; align-items:center;
-  padding:20px 5%; background:white; border-bottom:3px solid var(--azul);
-  gap:20px;
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  background:white;
+  border-bottom:3px solid var(--azul);
+
 }
 header img{ height:55px; }
 header h1{ font-size:30px; color:var(--azul-escuro); text-align:center; margin:0; }
 header nav{ display:flex; gap:25px; }
 header nav a{ text-decoration:none; color:var(--texto); font-weight:600; }
 header nav a:hover{ color:var(--laranja); }
+
+/*Esconder o hambúrger no desktop*/
+.menu-toggle{ 
+  display:none; 
+  font-size:28px;
+  background:none;
+  border:none;
+  color:white;
+  cursor:pointer;
+
+}
+
 
 /* BANNER */
 .banner{
@@ -65,9 +81,18 @@ footer a:hover{ color:var(--laranja); }
 
 /* MOBILE */
 @media(max-width:768px){
-  header{ flex-direction:column; text-align:center; }
-  .banner h2{ font-size:24px; }
-  .sobre{ flex-direction:column; }
+   .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: #0a0a0a;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  .menu-toggle {
+    display: block;
+  }
 }
 /* PÁGINAS INTERNAS */
 .page-header{ background:var(--azul-escuro); color:white; padding:60px 5%; text-align:center; }
