@@ -79,29 +79,24 @@ footer{ background:var(--azul-escuro); color:white; padding:30px 5%; display:gri
 footer a{ color:#cbd5e0; text-decoration:none; display:block; margin-top:6px; }
 footer a:hover{ color:var(--laranja); }
 
-/* MOBILE */
-/* FORÇA O MENU A NÃO CORTAR NO CELULAR */
+/* MOBILE- FORÇA O MENU A NÃO CORTAR NO CELULAR */
 @media (max-width: 768px) {
   header, nav {
     display: flex !important;
     flex-wrap: wrap !important;
     width: 100% !important;
   }
-  
   nav {
     overflow-x: auto !important;
     white-space: nowrap !important;
-    -webkit-overflow-scrolling: touch;
     scrollbar-width: none; /* esconde barra */
     gap: 12px !important;
     padding-bottom: 8px;
     justify-content: flex-start !important;
   }
-
   nav::-webkit-scrollbar {
     display: none;
   }
-
   nav a, nav button {
     flex-shrink: 0; /* impede de esmagar */
     font-size: 14px !important;
