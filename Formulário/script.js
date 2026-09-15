@@ -94,27 +94,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const SUPABASE_ANON_KEY = "https://taviponvwfixthhnfgvk.supabase.co/rest/v1/formulario";
   const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // 2. Captura o formulário do HTML
-  // const formulario = document.querySelector('form'); // ou use document.getElementById('id-do-form')
-
-  // 3. Escuta o evento de clique no botão de enviar (submit)
+  // 2. Escuta o evento de clique no botão de enviar (submit)
   formulario.addEventListener('submit', async (event) => {
     event.preventDefault(); // Evita que a página recarregue
 
-    // Captura os valores digitados nos inputs (substitua pelos IDs/Classes do seu HTML)
+    // Captura os valores digitados nos inputs 
     const nomeDigitado = document.getElementById('nome').value;
     const emailDigitado = document.getElementById('email').value;
     const mensagemDigitada = document.getElementById('mensagem').value;
 
     try {
-      // 4. Envia os dados para a tabela do Supabase
+      // 3. Envia os dados para a tabela do Supabase
       const { data, error } = await supabase
-        .from('respostas_formulario') // Nome exato da tabela criada no Passo 1
+        .from('formulario') // Nome da tabela
         .insert([
           {
-            nome: nomeDigitado,   // Coluna do banco : Variável do JS
-            email: emailDigitado,
-            mensagem: mensagemDigitada
+            nome: nomeDigitado,   // coluna nome na tabela do Supabase
+            email: emailDigitado, // coluna email na tabela do Supabase
+            mensagem: mensagemDigitada // coluna mensagem na tabela do Supabase
           }
         ]);
 
@@ -130,5 +127,4 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Ops! Ocorreu um erro ao enviar os dados.');
     }
   });
-
 });
