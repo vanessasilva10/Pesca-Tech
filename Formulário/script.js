@@ -92,86 +92,79 @@ document.addEventListener('DOMContentLoaded', () => {
   // CONEXÃO E ENVIO DE DADOS PARA O SUPABASE
   // ==========================================
 
-  // 1. Captura o formulário do HTML
   const formulario = document.getElementById("formulario");
 
-  // Garante que o código do Supabase só rode se o formulário existir na página atual
   if (formulario) {
-    
-    // 🚨 SEGURANÇA: Se por algum motivo a biblioteca atrasar para carregar,
-    // usamos 'window.supabase' para garantir que o navegador encontre a biblioteca global
-    if (typeof window.supabase === 'undefined') {
-      console.error("❌ A biblioteca do Supabase ainda não foi totalmente carregada pelo HTML.");
-      alert("Erro ao carregar o banco de dados. Por favor, atualize a página.");
-      return; // Para o código aqui para não quebrar a página
-    }
-
-    // 2. Inicializa o cliente do Supabase usando a variável global correta
-    const SUPABASE_URL = "https://supabase.co"; 
-    const SUPABASE_ANON_KEY = "COLE_AQUI_A_SUA_CHAVE_ANON_COMPLETA"; // Garanta que sua chave real está aqui
-    
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // ==========================================
-    // 🧪 TESTE DE CONEXÃO COM O SUPABASE
-    // ==========================================
-    async function testarConexao() {
-      try {
-        const { data, error } = await supabaseClient
-          .from('formulario')
-          .select('*')
-          .limit(1);
-
-        if (error) {
-          console.error("❌ Erro na comunicação com o Supabase:", error.message);
-        } else {
-          console.log("✅ CONEXÃO COM O SUPABASE ESTABELECIDA COM SUCESSO! Dados recebidos:", data);
-        }
-      } catch (err) {
-        console.error("💥 Erro crítico ao tentar conectar:", err);
-      }
-    }
-
-    // Executa o teste automático
-    testarConexao();
-    // ==========================================
-
-    // 3. Escuta o evento de clique no botão de enviar (submit)
-    formulario.addEventListener('submit', async (event) => {
-      event.preventDefault(); // Evita que a página recarregue
-
-      // Captura os valores digitados nos inputs 
-      const nomeDigitado = document.getElementById('nome').value;
-      const emailDigitado = document.getElementById('email').value;
-      const mensagemDigitada = document.getElementById('mensagem').value;
-
-      // Validação simples antes de enviar
-      if (!nomeDigitado || !emailDigitado || !mensagemDigitada) {
-        alert('Por favor, preencha todos os campos!');
+    // Função que vai tentar conectar ao Supabase assim que ele estiver disponível
+    function inicializarSupabase() {
+      // 1. Verifica se a biblioteca já surgiu na memória
+      if (typeof window.supabase === 'undefined') {
+        console.log("⏳ Aguardando a biblioteca do Supabase carregar na rede...");
+        // Se não apareceu ainda, espera 300 milissegundos e tenta de novo
+        setTimeout(inicializarSupabase, 300);
         return;
       }
 
-      try {
-        // 4. Envia os dados para a tabela do Supabase
-        const { data, error } = await supabaseClient
-          .from('formulario') // Nome exato da tabela no seu painel
-          .insert([
-            {
-              nome: nomeDigitado,   
-              email: emailDigitado, 
-              mensagem: mensagemDigitada 
-            }
-          ]);
+      console.log("📦 Biblioteca do Supabase encontrada! Inicializando...");
 
-        if (error) throw error;
+      // 2. Inicializa o cliente do Supabase
+      const SUPABASE_URL = "https://supabase.co";
+      const SUPABASE_ANON_KEY = "COLE_AQUI_A_SUA_CHAVE_ANON_COMPLETA"; // Garanta que sua chave real está aqui
 
-        alert('Dados salvos com sucesso no Supabase! 🎉');
-        formulario.reset(); // Limpa o formulário após enviar
+      const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-      } catch (error) {
-        console.error('Erro ao salvar no Supabase:', error);
-        alert('Ops! Ocorreu um erro ao enviar os dados. Verifique o console.');
+      // 🧪 Teste automático de conexão
+      async function testarConexao() {
+        try {
+          const { data, error } = await supabaseClient.from('formulario').select('*').limit(1);
+          if (error) {
+            console.error("❌ Erro na comunicação com o Supabase:", error.message);
+          } else {
+            console.log("✅ CONEXÃO COM O SUPABASE ESTABELECIDA COM SUCESSO! Dados recebidos:", data);
+          }
+        } catch (err) {
+          console.error("💥 Erro crítico ao tentar conectar:", err);
+        }
       }
-    });
+      testarConexao();
+
+      // 3. Escuta o evento de clique no botão de enviar (submit)
+      formulario.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const nomeDigitado = document.getElementById('nome').value;
+        const emailDigitado = document.getElementById('email').value;
+        const mensagemDigitada = document.getElementById('mensagem').value;
+
+        if (!nomeDigitado || !emailDigitado || !mensagemDigitada) {
+          alert('Por favor, preencha todos os campos!');
+          return;
+        }
+
+        try {
+          const { data, error } = await supabaseClient
+            .from('formulario')
+            .insert([
+              {
+                nome: nomeDigitado,
+                email: emailDigitado,
+                mensagem: mensagemDigitada
+              }
+            ]);
+
+          if (error) throw error;
+
+          alert('Dados salvos com sucesso no Supabase! 🎉');
+          formulario.reset();
+
+        } catch (error) {
+          console.error('Erro ao salvar no Supabase:', error);
+          alert('Ops! Ocorreu um erro ao enviar os dados. Verifique o console.');
+        }
+      });
+    }
+
+    // Dispara o cronômetro de espera
+    inicializarSupabase();
   }
-});
+}); 
