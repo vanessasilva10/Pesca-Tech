@@ -108,8 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log("📦 Biblioteca do Supabase encontrada! Inicializando...");
 
       // 2. Inicializa o cliente do Supabase
-      const SUPABASE_URL = "https://supabase.co";
-      const SUPABASE_ANON_KEY = "COLE_AQUI_A_SUA_CHAVE_ANON_COMPLETA"; // Garanta que sua chave real está aqui
+      const SUPABASE_URL = "https://taviponvwfixthhnfgvk.supabase.co";
+      const SUPABASE_ANON_KEY = "sb_publishable_sESmAMxBhMLaJS3SRhUczg_CnBPzEMs"; 
 
       const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
