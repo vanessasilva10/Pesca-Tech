@@ -5,22 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contatos</title>
-  <link rel="icon" href="imagens/ICON-Fish.512.png">
-  <link rel="stylesheet" href="estilos.css">
+  <link rel="icon" href="../imagens/ICON-Fish.512.png">
+  <link rel="stylesheet" href="../css/estilos_site.css">
+
+  <!-- Carrega os componentes antes do body carregar -->
+  <script src="../js/componentes.js"></script>
 </head>
 
 <body>
-  <header>
-    <img src="imagens/img.logo.png" alt="Pesca Tech - Engenharia de Pesca">
-    <h1>Pesca Tech</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="sobre.html">Sobre o Curso</a>
-      <a href="areas.html">Áreas de Atuação</a>
-      <a href="noticias.html">Notícias</a>
-      <a href="contato.html">Contatos</a>
-    </nav>
-  </header>
+  <meu-header></meu-header>
 
   <div class="page-header">
     <h1>Fale com o Pesca Tech</h1>
@@ -34,12 +27,11 @@
     </form>
   </main>
 
-  <footer style="padding: 15px 5%; text-align: center;">
-    <img src="imagens/rodape.png" alt="rodapé" style="max-height: 80px; width: auto;">
-  </footer>
 
+  <meu-footer></meu-footer>
+
+  <script src="../js/script.js" defer></script>
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-  <script src="Formulário/script.js" defer></script>
 
 </body>
 

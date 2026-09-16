@@ -5,22 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Áreas de Atuação</title>
-  <link rel="icon" href="imagens/ICON-Fish.512.png">
-  <link rel="stylesheet" href="estilos.css">
+  <link rel="icon" href="../imagens/ICON-Fish.512.png">
+  <link rel="stylesheet" href="../css/estilos_site.css">
+
+  <!-- Carrega os componentes antes do body carregar -->
+  <script src="../js/componentes.js"></script>
 </head>
 
 <body>
-  <header>
-    <img src="imagens/img.logo.png" alt="Pesca Tech - Engenharia de Pesca">
-    <h1>Pesca Tech</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="sobre.html">Sobre o Curso</a>
-      <a href="areas.html">Áreas de Atuação</a>
-      <a href="noticias.html">Notícias</a>
-      <a href="contato.html">Contatos</a>
-    </nav>
-  </header>
+  <meu-header></meu-header>
 
   <div class="page-header">
     <h1>Áreas de Atuação</h1>
@@ -28,9 +21,9 @@
   </div>
   <main class="page-content">
     <div class="area-detalhe">
-      <img src="imagens/aquicultura_cultivo.jpeg" class="img_aqui" alt="aquicultura">
-      <i class="fa-solid fa-fish"></i>
+      <img src="../imagens/aquicultura_cultivo.jpeg" class="img_aqui" alt="aquicultura">
       <div class="area-texto">
+        <i class="fa-solid fa-fish"></i>
         <h2>Piscicultura e Aquicultura</h2>
         <p> Planejamento e instalação de fazendas para a criação de peixes, camarões e moluscos. Projetos de viveiros,
           tanques-rede e fazendas marinhas. Muito forte
@@ -38,9 +31,9 @@
       </div>
     </div>
     <div class="area-detalhe">
-      <img src="imagens/Image -PESCA.jpeg" class="img_pesca" alt="pesca">
-      <i class="fa-solid fa-anchor"></i>
+      <img src="../imagens/Image -PESCA.jpeg" class="img_pesca" alt="pesca">
       <div class="area-texto">
+        <i class="fa-solid fa-anchor"></i>
         <h2>Pesca e Gestão Pesqueira</h2>
         <p> Gestão e monitoramento de frotas de pesca artesanal e industrial com foco na sustentabilidade, preservação
           dos estoques naturais, legislação e defeso.</p>
@@ -48,18 +41,18 @@
     </div>
 
     <div class="area-detalhe">
-      <img src="imagens/Image-TECNOLOLOGIA.jpeg" class="img_tec" alt="tecnologia do pescado">
-      <i class="fa-solid fa-microscope"></i>
+      <img src="../imagens/Image-TECNOLOLOGIA.jpeg" class="img_tec" alt="tecnologia do pescado">
       <div class="area-texto">
+        <i class="fa-solid fa-microscope"></i>
         <h2>Tecnologia do Pescado</h2>
         <p>Controle de qualidade, beneficiamento, conservação e industrialização do pescado até a distribuição
           comercial.</p>
       </div>
     </div>
     <div class="area-detalhe">
-      <img src="imagens/Image-meio_ambiente.jpeg" class="img_ambiente" alt="meio ambiente">
-      <i class="fa-solid fa-leaf"></i>
+      <img src="../imagens/Image-meio_ambiente.jpeg" class="img_ambiente" alt="meio ambiente">
       <div class="area-texto">
+        <i class="fa-solid fa-leaf"></i>
         <h2>Meio Ambiente</h2>
         <p> Atuação em órgãos ambientais (como o Ibama), empresas privadas, institutos de pesquisa ou empreendedorismo
           próprio. Licenciamento ambiental, recuperação de áreas degradadas e educação ambiental.</p>
@@ -67,11 +60,9 @@
     </div>
   </main>
 
-  <footer style="padding: 15px 5%; text-align: center;">
-    <img src="imagens/rodape.png" alt="rodapé" style="max-height: 80px; width: auto;">
-  </footer>
+  <meu-footer></meu-footer>
 
-  <script src="script.js"></script>
+  <script src="../js/script.js"></script>
 
 </body>
 

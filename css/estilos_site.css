@@ -1,0 +1,367 @@
+:root {
+  --azul: #115D9B;
+  --azul-escuro: #0A2F4F;
+  --laranja: #FF7A00;
+  --cinza-bg: #F5F7FA;
+  --texto: #2d3748;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+body {
+  color: var(--texto);
+  line-height: 1.6;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  /* Permite que itens desçam de linha se faltar espaço */
+  padding: 10px 5%;
+  /* Espaçamento relativo à largura da tela */
+  gap: 15px;
+  /* Distância segura entre logo, título e menu */
+  background: white;
+  border-bottom: 3px solid var(--azul);
+}
+
+header img {
+  max-height: 80px;
+  width: auto;
+  /* Mantém a proporção real sem distorcer */
+  max-width: 100%;
+  /* Nunca transborda a largura do pai */
+}
+
+header h1 {
+  font-size: 30px;
+  color: var(--azul-escuro);
+  text-align: center;
+  margin: 0;
+}
+
+header nav {
+  display: flex;
+  gap: 20px;
+}
+
+header nav a {
+  text-decoration: none;
+  color: var(--texto);
+  font-weight: 600;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+header nav a:hover {
+  color: var(--laranja);
+}
+
+/*Esconder o hambúrger no desktop*/
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+
+}
+
+/* BANNER */
+.banner {
+  background: url('../imagens/Aquicultura_img.jpg') center/cover;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
+  position: relative;
+}
+
+.banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 47, 79, 0.6);
+}
+
+.banner div {
+  position: relative;
+  color: white;
+  max-width: 500px;
+}
+
+.banner h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.banner a {
+  background: var(--laranja);
+  color: white;
+  padding: 12px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+}
+
+/* SOBRE */
+.sobre {
+  display: flex;
+  gap: 40px;
+  padding: 60px 5%;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.sobre img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+}
+
+.sobre h2 {
+  color: var(--azul);
+  margin-bottom: 15px;
+}
+
+.sobre a {
+  background: var(--azul);
+  color: white;
+  padding: 10px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+/* ÁREAS - CARDS */
+.areas {
+  background: var(--cinza-bg);
+  padding: 60px 5%;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.area-texto {
+  flex: 1;
+  text-align: center;
+}
+
+.area-texto i {
+  font-size: 36px;
+  color: var(--laranja);
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.img_aqui {
+  width: 45%;
+  border-radius: 15px;
+}
+
+.img_tec {
+  width: 45%;
+  border-radius: 15px;
+}
+
+.img_pesca {
+  width: 45%;
+  border-radius: 15px;
+}
+
+.img_ambiente {
+  width: 45%;
+  border-radius: 15px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-top: 4px solid var(--azul);
+}
+
+.card h3 {
+  color: var(--azul-escuro);
+  margin: 15px 0 10px;
+  font-size: 18px;
+}
+
+.card a {
+  margin-top: 15px;
+  display: inline-block;
+  color: var(--azul);
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--azul);
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+.card a:hover {
+  background: var(--azul);
+  color: white;
+}
+
+/* NOTÍCIAS */
+.noticias {
+  padding: 60px 5%;
+}
+
+.noticias h2 {
+  color: var(--azul);
+  margin-bottom: 30px;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.news-item img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+/* FOOTER */
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 15px 5%;
+  background: var(--azul-escuro);
+  color: white;
+  gap: 15px;
+}
+
+/* Imagem do rodapé */
+footer img {
+  max-height: 80px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+footer a {
+  color: #cbd5e0;
+  text-decoration: none;
+  display: block;
+  margin-top: 6px;
+}
+
+footer a:hover {
+  color: var(--laranja);
+}
+
+/* Texto de créditos */
+footer p {
+  margin: 0;
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  /* Escala suavemente */
+}
+
+/* MOBILE- FORÇA O MENU A NÃO CORTAR NO CELULAR */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block !important;
+    /* Mostra o botão hambúrguer */
+    font-size: 26px;
+    background: none;
+    border: none;
+    color: var(--azul-escuro);
+    cursor: pointer;
+  }
+
+  header nav {
+    display: none !important;
+    /* Fica oculto (hide) por padrão */
+    flex-direction: column;
+    width: 100%;
+    background: white;
+    padding: 15px 0;
+    gap: 12px;
+  }
+
+  header nav.ativo {
+    display: flex !important;
+    /* Exibe o menu ao clicar */
+  }
+}
+
+
+/* PÁGINAS INTERNAS */
+.page-header {
+  background: var(--azul-escuro);
+  color: white;
+  padding: 60px 5%;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 36px;
+}
+
+.page-content {
+  padding: 60px 5%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.area-detalhe {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 50px;
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.area-detalhe i {
+  font-size: 40px;
+  color: var(--laranja);
+}
+
+.form-contato {
+  display: grid;
+  gap: 15px;
+  max-width: 600px;
+}
+
+.form-contato input,
+.form-contato textarea {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.form-contato button {
+  background: var(--laranja);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}

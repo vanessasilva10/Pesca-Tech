@@ -1,57 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pesca Tech</title>
+  <title>Pesca Tech - Home</title>
   <link rel="icon" href="imagens/ICON-Fish.512.png">
-  <link rel="stylesheet" href="estilos.css">
+  <link rel="stylesheet" href="css/estilos_site.css">
 
+  <!-- Carrega os componentes antes do body carregar -->
+  <script src="js/componentes.js"></script>
 </head>
 
 <body>
-  <header>
-    <img src="imagens/img.logo.png" style="max-height: 80px !important; width: auto;"
-      alt=" Pesca Tech - Engenharia de Pesca">
-   
-    <h1>Pesca Tech</h1>
-    
-    <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
-      ☰
-    </button>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="sobre.html">Sobre o Curso</a>
-      <a href="areas.html">Áreas de Atuação</a>
-      <a href="noticias.html">Notícias</a>
-      <a href="contato.html">Contatos</a>
-    </nav>
-  </header>
+
+  <meu-header></meu-header>
 
   <main>
     <section class="banner">
       <div>
         <h2>Engenharia que impulsiona a sustentabilidade dos recursos pesqueiros.</h2>
-        <a href="Contato.html">Saiba mais</a>
-      </div>
-    </section>
-
-    <section class="sobre">
-      <img src="imagens/Image_TANGUES.jpeg" alt="Tanques de aquicultura">
-      <div>
-        <h2>Sobre o Curso de Engenharia de Pesca</h2>
-        <p>A Engenharia de Pesca alia ciência, tecnologia e gestão para o uso sustentável dos recursos aquáticos...</p>
-        <a href="Sobre.html">Conheça mais</a>
+        <a href="paginas/contato.html">Saiba mais</a>
       </div>
     </section>
 
     <section class="areas">
       <div class="cards">
+
         <div class="card">
           <h3>Piscicultura e Aquicultura</h3>
           <p>Produção sustentável</p>
         </div>
+
         <div class="card">
           <h3>Pesca e Gestão</h3>
           <p>Planejamento e gestão</p>
@@ -61,6 +41,7 @@
           <h3>Tecnologia do Pescado</h3>
           <p>Processamento e inovação</p>
         </div>
+
         <div class="card">
           <h3>Meio Ambiente</h3>
           <p>Preservação dos ecossistemas</p>
@@ -70,11 +51,9 @@
 
   </main>
 
-  <footer style="padding: 15px 5%; text-align: center;">
-    <img src="imagens/rodape.png" alt="rodapé" style="max-height: 80px; width: auto;">
-  </footer>
+  <meu-footer></meu-footer>
 
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 
 </html>
